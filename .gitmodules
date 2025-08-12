@@ -1,0 +1,6 @@
+[submodule "recipe-1-hello-world/lib/forge-std"]
+	path = recipe-1-hello-world/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "recipe-2-numbers-math/lib/forge-std"]
+	path = recipe-2-numbers-math/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
