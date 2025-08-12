@@ -1,0 +1,284 @@
+# Solidity Cookbook Recipe Template
+
+You are creating a Solidity cookbook recipe for teaching smart contract development with security focus. Follow this exact structure for each recipe:
+
+## Recipe Structure
+
+### Recipe [Number]: [Title] - [Subtitle describing focus area]
+
+### 📋 What You'll Learn
+- List 4-6 specific learning objectives
+- Include both basic concepts and security concerns
+- Mention any design patterns covered
+- Note any gas optimization techniques
+
+### 🧩 Understanding the Ingredients
+
+Create a comprehensive breakdown of EVERY Solidity concept used:
+
+**1. [Concept Name]**
+```solidity
+// Example code showing the concept
+```
+- **Definition**: Clear explanation of what it is
+- **Purpose**: Why we use it
+- **Gas Cost**: Approximate gas costs if relevant
+- **Common Mistakes**: What developers often get wrong
+- **Best Practice**: How to use it correctly
+
+Continue for all concepts (typically 8-12 ingredients per recipe)
+
+### 📝 The Main Contract
+
+Create TWO versions in a single file:
+
+1. **Vulnerable Version** (`Contract` name)
+   - Include 5-7 intentional vulnerabilities
+   - Label each with: `// VULNERABILITY [#]: [Description]`
+   - Make vulnerabilities realistic but educational
+   - Include comments explaining what's wrong
+
+2. **Secure Version** (`ContractSecure` name)
+   - Fix all vulnerabilities from vulnerable version
+   - Label each fix with: `// FIX [#]: [Description]`
+   - Add security modifiers and checks
+   - Include best practices like two-step operations, rate limiting, etc.
+
+Contract Requirements:
+- Use clear, descriptive variable names
+- Include NatSpec comments for all functions
+- Add events for all state changes
+- Include view/pure helper functions
+- Demonstrate at least one complex pattern
+
+### 🧪 The Test File
+
+Create comprehensive tests including:
+
+**Test Structure:**
+```solidity
+contract [ContractName]Test is Test {
+    // Setup section
+    - Deploy both vulnerable and secure contracts
+    - Create test accounts (alice, bob, attacker)
+    - Fund accounts
+    - Set up any needed mock contracts
+
+    // Basic Functionality Tests (5-10 tests)
+    - Test all happy paths
+    - Test all getters/setters
+    - Test events are emitted
+
+    // Vulnerability Tests (1 test per vulnerability)
+    - Demonstrate each vulnerability
+    - Show how it fails in vulnerable version
+    - Show how it's fixed in secure version
+    - Use descriptive test names: test_Vulnerability_[Name]
+
+    // Security Feature Tests (5-10 tests)
+    - Test all modifiers work correctly
+    - Test access control
+    - Test input validation
+    - Test edge cases
+
+    // Fuzz Tests (2-5 tests)
+    - Test with random inputs
+    - Use vm.assume for constraints
+    - Test invariants hold
+
+    // Helper Contracts (if needed)
+    - Attacker contracts
+    - Mock contracts
+    - Reentrancy testers
+}
+```
+
+### 🔒 Vulnerabilities Demonstrated
+
+For each vulnerability provide:
+
+**[#]. [Vulnerability Name]**
+- **How it works**: Technical explanation
+- **Real-world impact**: What could happen if exploited
+- **The fix**: How the secure version prevents it
+- **Gas impact**: Any gas implications of the fix
+- **Historical example**: Link to real hack if applicable
+
+### ⚡ Gas Optimization Tips
+
+Include 3-5 gas optimization techniques relevant to this recipe:
+- Specific optimization with before/after gas costs
+- Code example showing the optimization
+- When to use vs when not to use
+
+### 🎯 Key Security Patterns
+
+List and explain 2-4 security patterns used:
+- **Pattern Name**: Brief description
+- **Implementation**: How it's used in this recipe
+- **When to use**: Scenarios where this pattern applies
+
+### 🏃 Running the Recipe
+
+```bash
+# Installation (if first recipe)
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+
+# Setup
+forge init Recipe[#]-[Name]
+cd Recipe[#]-[Name]
+
+# Add files
+# Copy contract to src/[ContractName].sol
+# Copy tests to test/[ContractName].t.sol
+
+# Run tests
+forge test                          # Run all tests
+forge test -vvv                     # Verbose output
+forge test --match-test [name]     # Specific test
+forge test --gas-report            # Gas analysis
+forge coverage                      # Coverage report
+forge test --fuzz-runs 10000       # Extended fuzzing
+```
+
+### 📊 Expected Test Output
+
+Show what successful test output looks like:
+```
+[PASS] test_InitialState() (gas: ~24,521)
+[PASS] test_Vulnerability_[Name]() (gas: ~87,234)
+[PASS] testFuzz_[FunctionName](uint256) (runs: 256, μ: ~19,382, ~: ~19,417)
+```
+
+### 🔍 Debugging Common Issues
+
+List 3-5 common problems students might encounter:
+
+**Issue**: [Description]
+**Solution**: [How to fix]
+**Prevention**: [How to avoid in future]
+
+### 💡 Practice Exercises
+
+Provide 4-6 exercises that build on the recipe:
+
+1. **[Exercise Name]**: [Brief description]
+   - Hint: [Guidance without giving away solution]
+   - Learning goal: [What this teaches]
+
+2. Continue for all exercises...
+
+### 🔗 Real-World Applications
+
+Provide 2-3 examples of where this pattern is used:
+- **[Protocol/Project Name]**: How they use this pattern
+- Link to actual contract if possible
+- Note any variations or improvements
+
+### 📚 Additional Resources
+
+- Link to relevant OpenZeppelin contracts
+- Link to relevant EIPs
+- Link to security audit reports demonstrating these issues
+- Link to deep-dive articles
+
+### ✅ Checklist Before Moving On
+
+Student should be able to:
+- [ ] Explain [concept 1]
+- [ ] Identify [vulnerability type]
+- [ ] Implement [pattern]
+- [ ] Write tests for [feature]
+- [ ] Calculate gas costs for [operation]
+- Continue for 5-8 items...
+
+### 🎪 Next Recipe Preview
+
+"In Recipe [#], we'll explore [next topic], building on [current concepts] to learn about [advanced topic]..."
+
+---
+
+## Meta Guidelines for Recipe Creation
+
+### Complexity Progression
+- Recipe 1-3: Fundamentals (storage, functions, events)
+- Recipe 4-6: Intermediate (tokens, access control, math)
+- Recipe 7-9: Advanced (proxies, governance, DeFi patterns)
+- Recipe 10+: Expert (MEV, advanced DeFi, cross-chain)
+
+### Vulnerability Selection
+- Mix of common and subtle vulnerabilities
+- Include at least one from each category:
+  - Input validation
+  - Access control
+  - Reentrancy/CEI pattern
+  - Integer/math issues
+  - Gas/DoS vectors
+  - Business logic flaws
+
+### Test Coverage Requirements
+- Minimum 95% code coverage
+- Test both positive and negative cases
+- Include edge cases (0, max values, empty strings)
+- Fuzz test any function with numeric inputs
+- Test all modifiers separately
+
+### Code Style Requirements
+- Max 100 characters per line
+- Consistent indentation (4 spaces)
+- NatSpec for all public/external functions
+- Descriptive variable names (no single letters except loop indices)
+- Group related functions together
+- Order: state variables, events, modifiers, constructor, external, public, internal, private
+
+### Educational Principles
+- Start with broken code to show consequences
+- Fix incrementally to show thought process
+- Explain WHY not just HOW
+- Connect to real-world hacks when possible
+- Provide cost/benefit analysis for security measures
+- Show gas optimization trade-offs
+
+### Common Sections to Include Based on Topic
+
+**For Token Recipes:**
+- Token standards comparison
+- Decimal handling
+- Approval patterns
+- Token security considerations
+
+**For DeFi Recipes:**
+- Price oracle discussion
+- Slippage protection
+- MEV considerations
+- Liquidity considerations
+
+**For Access Control Recipes:**
+- Role comparison table
+- Upgrade patterns
+- Pausability considerations
+- Multi-sig patterns
+
+**For Math-Heavy Recipes:**
+- Precision loss examples
+- Overflow scenarios
+- Rounding direction importance
+- Fixed-point arithmetic
+
+### Output Format Requirements
+
+Each recipe should produce:
+1. Main contract file (vulnerable + secure versions)
+2. Test file with >95% coverage
+3. This formatted documentation
+4. Optional: Deploy script if complex
+5. Optional: Slither/mythril config if needed
+
+### Version Requirements
+- Solidity: ^0.8.19 or latest stable
+- Foundry: Latest version
+- OpenZeppelin: 5.0.0+ if used
+- Include version justification if using older
+
+Remember: Each recipe should be self-contained but build on previous knowledge. Someone should be able to understand a recipe with only knowledge from previous recipes.
